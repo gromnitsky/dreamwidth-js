@@ -32,6 +32,7 @@ let render = function(input, opt) {
 
 program
     .usage('[options] < file.json')
+    .version(cli.meta.version)
     .option('-s, --standalone', 'output w/ an appropriate header & footer ')
     .parse(process.argv)
 
