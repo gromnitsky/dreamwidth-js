@@ -1,0 +1,17 @@
+{
+    "name": "dreamwidth-js",
+    "version": "0.0.1",
+    "description": "dreamwidth.org library & a CLI client",
+    "main": "lib/dreamwidth.js",
+    "dependencies": {
+	"commander": "~2.9.0",
+	"netrc": "~0.1.4",
+	"xmlrpc": "~1.3.2"
+    },
+    "devDependencies": {},
+    "keywords": [
+	"dreamwidth"
+    ],
+    "author": "Alexander Gromnitsky",
+    "license": "MIT"
+}

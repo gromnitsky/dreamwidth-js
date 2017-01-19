@@ -3,22 +3,17 @@
 
 let program = require('commander')
 
-let common = require('./lib/common')
+let cli = require('./lib/cli')
 let dw = require('./lib/dreamwidth')
 
-program
-    .version('0.0.1')
-    .usage('[-n]')
-    .option('-n, --netrc <string>', 'a path to a .netrc')
-    .parse(process.argv)
+program.parse(process.argv)
 
-let cridentials = common.cridentials(program.netrc)
-let journal = new dw.Dreamwidth(cridentials.login, cridentials.password)
+let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
 
 journal.login().then( () => {
     return journal.login_test()
 }).then( val => {
     console.log(val)
 }).catch( err => {
-    common.err_abort(err)
+    cli.abort(err)
 })

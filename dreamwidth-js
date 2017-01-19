@@ -2,9 +2,14 @@
 'use strict';
 
 let program = require('commander')
+let cli = require('./lib/cli')
+
+cli.cridentials_export()
 
 program
-    .version('0.0.1')
+    .version(cli.meta.version)
+    .option('-n, --netrc <string>', 'a path to a .netrc',
+	    cli.cridentials_export)
     .command('login-test', 'do a test login')
     .command('entry-post', 'post a new entry')
     .parse(process.argv)
