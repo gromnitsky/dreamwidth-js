@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-let fs = require('fs')
-
 let program = require('commander')
 
 let cli = require('./lib/cli')
@@ -17,8 +15,8 @@ program
     .option('--security <string>', 'private, public', 'private')
     .parse(process.argv)
 
-let input = fs.readFileSync('/dev/stdin').toString() // FIXME
-if (input.trim().length === 0) cli.errx('invalid input')
+let input = cli.read_stdout()
+if (!input.trim().length) cli.errx('invalid input')
 
 let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
 program.date = new Date(Date.parse(program.date) || Date.now())
