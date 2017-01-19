@@ -1,0 +1,55 @@
+{{{ content }}}
+
+{{#attachments}}
+<hr>
+<b>Attachments:</b>
+<p>
+  <a href='{{{url}}}' title='{{content}}'>{{displayName}}</a><br>
+  {{#fullImage.url}}
+  <img src='{{{fullImage.url}}}' alt=''>
+  {{/fullImage.url}}
+  {{#thumbnails}}
+  <a href='{{{url}}}'><img src='{{{image.url}}}'></a>
+  {{/thumbnails}}
+</p>
+{{/attachments}}
+
+
+{{#plusoners.totalItems}}
+<hr>
+<b>+1'd by:</b>
+<ol>
+{{/plusoners.totalItems}}
+
+{{#plusoners.items}}
+<li> <a href='{{{url}}}'>{{displayName}}</a> </li>
+{{/plusoners.items}}
+
+{{#plusoners.totalItems}}
+</ol>
+{{/plusoners.totalItems}}
+
+
+{{#replies.totalItems}}
+<hr>
+<b>Comments:</b>
+<ol>
+{{/replies.totalItems}}
+
+{{#replies.items}}
+<li> <a href='{{{actor.url}}}'>{{actor.displayName}}</a>, <small>{{published}}</small>
+  <p>
+    {{{object.content}}}
+  </p>
+</li>
+{{/replies.items}}
+
+{{#replies.totalItems}}
+</ol>
+{{/replies.totalItems}}
+
+<hr>
+
+<p>
+Permalink: <a href='{{{url}}}'>{{url}}</a>
+</p>

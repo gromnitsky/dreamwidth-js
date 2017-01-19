@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+'use strict';
+
+let fs = require('fs')
+
+let program = require('commander')
+let Mustache = require('mustache')
+
+let cli = require('./lib/cli')
+
+let template = function(name) {
+    return fs.readFileSync(__dirname + '/lib/templates/' + name).toString()
+}
+
+String.prototype.spaces = function() {
+    return this.replace(/\s+/g, ' ')
+}
+
+let render = function(input, opt) {
+    let json = JSON.parse(input)
+    let body = Mustache.render(template('body.html'), json.object)
+    if (!opt.standalone) return body
+
+    let date = new Date(json.published)
+    let view = {
+	title: `${json.actor.displayName} :: ${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} :: ${json.title.spaces()}`,
+	author: json.actor.displayName,
+	body
+    }
+    return Mustache.render(template('standalone.html'), view)
+}
+
+program
+    .usage('[options] < file.json')
+    .option('-s, --standalone', 'output w/ an appropriate header & footer ')
+    .parse(process.argv)
+
+let input = cli.read_stdout()
+if (!input.trim().length) cli.errx('invalid input')
+
+process.stdout.write(render(input, {standalone: program.standalone}))
