@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+'use strict';
+
+let program = require('commander')
+
+let common = require('./lib/common')
+let dw = require('./lib/dreamwidth')
+
+program
+    .version('0.0.1')
+    .usage('[-n]')
+    .option('-n, --netrc <string>', 'a path to a .netrc')
+    .parse(process.argv)
+
+let cridentials = common.cridentials(program.netrc)
+let journal = new dw.Dreamwidth(cridentials.login, cridentials.password)
+
+journal.login().then( () => {
+    return journal.login_test()
+}).then( val => {
+    console.log(val)
+}).catch( err => {
+    common.err_abort(err)
+})
