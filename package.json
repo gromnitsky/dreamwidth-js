@@ -1,7 +1,7 @@
 {
     "name": "dreamwidth-js",
     "version": "0.0.1",
-    "description": "dreamwidth.org library & a CLI client",
+    "description": "An xmlrpc dreamwidth.org library, a CLI client & a Google+ posts importer",
     "main": "lib/dreamwidth.js",
     "dependencies": {
 	"commander": "~2.9.0",
@@ -14,5 +14,11 @@
 	"dreamwidth"
     ],
     "author": "Alexander Gromnitsky",
-    "license": "MIT"
+    "license": "MIT",
+    "bin" : "./dreamwidth-js",
+    "homepage": "https://github.com/gromnitsky/dreamwidth-js",
+    "repository": {
+	"type": "git",
+	"url": "git://github.com/gromnitsky/dreamwidth-js.git"
+    }
 }
