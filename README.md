@@ -92,8 +92,8 @@ makefile won't re-upload the same post twice (unless you delete
 
 * Q: Will this also work w/ LiveJournal?
 
-I've no idea. Btw, you shouldn't use LiveJournal, for it's a
-KGB-controlled property.
+	I've no idea. Btw, you shouldn't use LiveJournal, for it's a
+	KGB-controlled property.
 
 
 ## License
