@@ -46,7 +46,7 @@ sq = '$(subst ','\'',$(1))'
 
 %.POSTED: %.json
 	$(src)/google-plus-json2html < $< | $(src)/dreamwidth-js entry-post \
-		-s $(call sq,$(shell json title < $< | head -c 100)) \
+		-s $(call sq,$(shell json title -e 'if (!this.title) this.title="No Title"' < $< | head -c 100)) \
 		-d '$(shell json published < $<)' \
 		-t '$(TAGS)' --security $(SECURITY) --backdated > $@
 
