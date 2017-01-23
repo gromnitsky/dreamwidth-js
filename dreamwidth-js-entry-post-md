@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+'use strict';
+
+let marked = require('marked')
+let fm = require('front-matter')
+let commander = require('commander')
+let concat = require('concat-stream')
+
+let cli = require('./lib/cli')
+let dw = require('./lib/dreamwidth')
+
+let md_parse = function(input) {
+    let params = fm(input)
+    let r = {}
+    for (let key in params.attributes)
+	r[key.toLowerCase()] = params.attributes[key]
+
+    r.body = marked(params.body)
+    r.subject = (r.subject || r.title || '').trim() || undefined
+    return r
+}
+
+commander.parse(process.argv) // it's here only for reacting on -h
+
+process.stdin.pipe(concat( input => {
+    input = input.toString()
+    if (!input.trim().length) cli.errx('invalid input')
+
+    let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
+    journal.debug = !!process.env.dw_debug
+    let params = md_parse(input)
+    params.date = new Date(Date.parse(params.date) || Date.now())
+
+    journal.login().then( () => {
+	return journal.entry_post(params.subject, params.date, params.tags,
+				  params.body, {
+				      opt_backdated: params.backdated,
+				      security: params.security
+				  })
+    }).then( val => {
+	console.log(val)
+    }).catch( err => {
+	cli.abort(err)
+    })
+
+}))
