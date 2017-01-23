@@ -8,6 +8,9 @@ cli.cridentials_export()
 
 program
     .version(cli.meta.version)
+    .option('--debug', '(ignore)', () => {
+	process.env.dw_debug = 1
+    })
     .option('-n, --netrc <string>', 'a path to a .netrc',
 	    cli.cridentials_export)
     .command('login-test', 'do a test login')

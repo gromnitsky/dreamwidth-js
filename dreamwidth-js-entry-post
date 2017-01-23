@@ -2,33 +2,38 @@
 'use strict';
 
 let program = require('commander')
+let concat = require('concat-stream')
 
 let cli = require('./lib/cli')
 let dw = require('./lib/dreamwidth')
 
 program
     .usage('[options] < file.html')
-    .option('-s, --subject <string>', 'entry title', 'No Title')
+    .option('-s, --subject <string>', 'entry title')
     .option('-d, --date <string>', 'YYYY-MM-DD HH:MM')
     .option('-t, --tags <string>', 'tags separated by commas')
     .option('--backdated', "don't show up on people's friends lists")
     .option('--security <string>', 'private, public', 'private')
     .parse(process.argv)
 
-let input = cli.read_stdout()
-if (!input.trim().length) cli.errx('invalid input')
+process.stdin.pipe(concat( input => {
+    input = input.toString()
+    if (!input.trim().length) cli.errx('invalid input')
 
-let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
-program.date = new Date(Date.parse(program.date) || Date.now())
+    let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
+    journal.debug = !!process.env.dw_debug
+    program.date = new Date(Date.parse(program.date) || Date.now())
 
-journal.login().then( () => {
-    return journal.entry_post(program.subject, program.date, program.tags,
-			      input, {
-				  opt_backdated: program.backdated,
-				  security: program.security
-			      })
-}).then( val => {
-    console.log(val)
-}).catch( err => {
-    cli.abort(err)
-})
+    journal.login().then( () => {
+	return journal.entry_post(program.subject, program.date, program.tags,
+				  input, {
+				      opt_backdated: program.backdated,
+				      security: program.security
+				  })
+    }).then( val => {
+	console.log(val)
+    }).catch( err => {
+	cli.abort(err)
+    })
+
+}))

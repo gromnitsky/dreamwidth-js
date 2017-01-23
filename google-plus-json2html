@@ -5,6 +5,7 @@ let fs = require('fs')
 
 let program = require('commander')
 let Mustache = require('mustache')
+let concat = require('concat-stream')
 
 let cli = require('./lib/cli')
 
@@ -36,7 +37,9 @@ program
     .option('-s, --standalone', 'output w/ an appropriate header & footer ')
     .parse(process.argv)
 
-let input = cli.read_stdout()
-if (!input.trim().length) cli.errx('invalid input')
+process.stdin.pipe(concat( input => {
+    input = input.toString()
+    if (!input.trim().length) cli.errx('invalid input')
 
-process.stdout.write(render(input, {standalone: program.standalone}))
+    process.stdout.write(render(input, {standalone: program.standalone}))
+}))
