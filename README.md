@@ -69,6 +69,29 @@ $ kramdown readme.md | dreamwidth-js entry-post -s test
 By default the post will be visible only to you; to make it public,
 pass `--security public` option.
 
+Or you can use `dreamwidth-js entry-post-md` subcommand that expects
+markdown w/ a valid front-matter:
+
+~~~
+$ dreamwidth-js entry-post-md
+---
+subject: On today's proceedings
+tags: meeting, an exciting waste of time
+security: public
+---
+
+## Agenda for Mon. budget meeting
+
+It was a dark and stormy night; the rain fell in torrents
+^D
+{ anum: 194,
+  url: 'https://john_doe.dreamwidth.org/363970.html',
+  itemid: 1421 }
+~~~
+
+where each key in the YAML corresponds to an cmd arg of `entry-post`
+(that `entry-post-md` invokes under the hood).
+
 
 ## Google+ posts importer
 
@@ -92,8 +115,8 @@ makefile won't re-upload the same post twice (unless you delete
 
 * Q: Will this also work w/ LiveJournal?
 
-	I've no idea. Btw, you shouldn't use LiveJournal, for it's a
-	KGB-controlled property.
+	I've no idea. Btw, you shouldn't use LiveJournal, for it's
+	effectually a KGB-controlled company.
 
 
 ## License
