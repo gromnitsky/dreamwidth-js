@@ -16,4 +16,5 @@ program
     .command('login-test', 'do a test login')
     .command('entry-post', 'post a new entry (w/ html as the input)')
     .command('entry-post-md', 'post a new entry (w/ markdown as the input)')
+    .command('img-upload', 'upload an image')
     .parse(process.argv)
