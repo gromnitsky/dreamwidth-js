@@ -39,7 +39,7 @@ $ dreamwidth-js login-test
   userid: 123456789 }
 ~~~
 
-### Posting
+### Posting raw HTML
 
 ~~~
 $ dreamwidth-js help entry-post
@@ -69,8 +69,10 @@ $ kramdown readme.md | dreamwidth-js entry-post -s test
 By default the post will be visible only to you; to make it public,
 pass `--security public` option.
 
-Or you can use `dreamwidth-js entry-post-md` subcommand that expects
-markdown w/ a valid front-matter:
+### Posting markdown
+
+`entry-post-md` subcommand that expects github-compatible markdown w/
+a valid front-matter:
 
 ~~~
 $ dreamwidth-js entry-post-md
@@ -91,6 +93,25 @@ It was a dark and stormy night; the rain fell in torrents
 
 where each key in the YAML corresponds to an cmd arg of `entry-post`
 (that `entry-post-md` invokes under the hood).
+
+
+## Uploading an image
+
+At the time of writing DW has an experimental file uploader w/ a
+DOM-only interface. We can obtain a session cookie via xmlrpc & make a
+POST request w/ a `multipart/form-data` payload & the aforementioned
+cookie.
+
+~~~
+$ dreamwidth-js img-upload -u < cat.jpg
+https://john_doe.dreamwidth.org/file/7623.jpg
+~~~
+
+(It uses file(1) for guessing the proper mime type.)
+
+The session cookie is valid for 24 hours & will be updated
+automatically when needed. It's stored at
+`$XDG_CACHE_HOME/dreamwidth-js/session`.
 
 
 ## Google+ posts importer
