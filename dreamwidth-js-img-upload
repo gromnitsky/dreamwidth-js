@@ -13,18 +13,17 @@ let dw = require('./lib/dreamwidth')
 
 let mime = function(input) {
     let kid = cp.spawnSync('file', ['-b', '--mime-type', '-'], {
-	input: input,
+	input,
 	timeout: 10 * 1000,
     })
-    if (kid.status !== 0)
-	cli.errx('failed to determine the mime type'
-		 + (kid.error ? `: ${kid.error}` : ''))
+    if (kid.status !== 0) cli.errx('failed to determine a mime type'
+				   + (kid.error ? `: ${kid.error}` : ''))
     return kid.stdout.toString()
 }
 
 program
     .usage('[options] < file.jpg')
-    .option('-u, --res-url', 'print just an img url after the upload')
+    .option('-u, --res-url', 'print only an image url after the upload')
     .parse(process.argv)
 
 let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
