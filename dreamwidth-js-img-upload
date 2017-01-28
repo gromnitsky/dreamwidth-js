@@ -10,6 +10,7 @@ let FormData = require('form-data')
 
 let cli = require('./lib/cli')
 let dw = require('./lib/dreamwidth')
+let SessionFile = require('./lib/sessionfile')
 
 let mime = function(input) {
     let kid = cp.spawnSync('file', ['-b', '--mime-type', '-'], {
@@ -27,7 +28,7 @@ program
     .parse(process.argv)
 
 let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
-let session = new dw.Session(journal)
+let session = new SessionFile(journal)
 session.log = cli.perrx
 
 process.stdin.pipe(concat( input => {
