@@ -10,9 +10,7 @@ program.parse(process.argv)
 
 let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
 
-journal.login().then( () => {
-    return journal.login_test()
-}).then( val => {
+journal.login_test().then( val => {
     console.log(val)
 }).catch( err => {
     cli.abort(err)

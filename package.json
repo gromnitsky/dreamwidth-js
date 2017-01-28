@@ -16,7 +16,9 @@
 	"xdg-basedir": "~2.0.0",
 	"xmlrpc": "~1.3.2"
     },
-    "devDependencies": {},
+    "devDependencies": {
+	"nock": "~9.0.2"
+    },
     "keywords": [
 	"dreamwidth"
     ],

@@ -20,20 +20,19 @@ process.stdin.pipe(concat( input => {
     input = input.toString()
     if (!input.trim().length) cli.errx('invalid input')
 
-    let journal = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
-    journal.debug = !!process.env.dw_debug
+    let jrn = new dw.Dreamwidth(process.env.dw_login, process.env.dw_password)
+    jrn.debug = !!process.env.dw_debug
     program.date = new Date(Date.parse(program.date) || Date.now())
 
-    journal.login().then( () => {
-	return journal.entry_post(program.subject, program.date, program.tags,
-				  input, {
-				      opt_backdated: program.backdated,
-				      security: program.security
-				  })
-    }).then( val => {
-	console.log(val)
-    }).catch( err => {
-	cli.abort(err)
-    })
+    jrn.entry_post(program.subject, program.date, program.tags,
+		   input, {
+		       opt_backdated: program.backdated,
+		       security: program.security
+		   })
+	.then( val => {
+	    console.log(val)
+	}).catch( err => {
+	    cli.abort(err)
+	})
 
 }))
