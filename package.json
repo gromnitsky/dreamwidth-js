@@ -1,6 +1,6 @@
 {
     "name": "dreamwidth-js",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "An xmlrpc dreamwidth.org library, a CLI client & a Google+ posts importer",
     "main": "lib/dreamwidth.js",
     "dependencies": {
