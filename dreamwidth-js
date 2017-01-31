@@ -3,11 +3,12 @@
 
 let program = require('commander')
 let cli = require('./lib/cli')
+let version = require('./lib/dreamwidth').user_agent()
 
 cli.cridentials_export()
 
 program
-    .version(cli.meta.version)
+    .version(version)
     .option('--debug', '(ignore)', () => {
 	process.env.dw_debug = 1
     })
