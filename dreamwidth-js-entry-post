@@ -13,7 +13,7 @@ program
     .option('-d, --date <string>', 'YYYY-MM-DD HH:MM')
     .option('-t, --tags <string>', 'tags separated by commas')
     .option('--backdated', "don't show up on people's friends lists")
-    .option('--security <string>', 'private, public', 'private')
+    .option('--security <string>', 'private, friends, public', 'private')
     .parse(process.argv)
 
 process.stdin.pipe(concat( input => {

@@ -53,7 +53,7 @@ $ dreamwidth-js help entry-post
     -d, --date <string>     YYYY-MM-DD HH:MM
     -t, --tags <string>     tags separated by commas
     --backdated             don't show up on people's friends lists
-    --security <string>     private, public
+    --security <string>     private, friends, public
 ~~~
 
 The util expects a raw html from the stdin. You may write your post in
