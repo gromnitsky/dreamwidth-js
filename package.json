@@ -8,7 +8,7 @@
 	"concat-stream": "~1.6.0",
 	"form-data": "~2.1.2",
 	"front-matter": "~2.1.1",
-	"marked": "~0.3.6",
+	"marked": "~0.6.2",
 	"mkdirp": "~0.5.1",
 	"mustache": "~2.3.0",
 	"netrc": "~0.1.4",
