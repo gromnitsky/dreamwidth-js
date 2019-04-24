@@ -26,7 +26,12 @@ commander.parse(process.argv) // it's here only for reacting on -h
 
 process.stdin.pipe(concat( input => {
     input = input.toString()
-    let params = md_parse(input)
+    let params
+    try {
+	params = md_parse(input)
+    } catch (e) {
+	cli.errx(e)
+    }
     if (process.env.dw_debug) console.log(params)
 
     let kid = spawn(__dirname + '/dreamwidth-js-entry-post', params.args,
