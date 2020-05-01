@@ -22,12 +22,17 @@ machine dreamwidth.org
   login john_doe
   password a6efa2902a81b8218a8d8fa59eb60229
 ~~~
+
 where the password field is an md5 hashed string; you may get it from
 
 ~~~
 $ printf a-very-strong-password | md5sum
 a6efa2902a81b8218a8d8fa59eb60229  -
 ~~~
+
+(**2020/05/01 update**: DW tries to 'modernise' its API. Today you
+need to [generate](https://www.dreamwidth.org/manage/emailpost) an
+"API key" first & md5 that key instead of your real password.)
 
 To test the correctness of the entry, run:
 
