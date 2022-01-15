@@ -8,7 +8,7 @@
 	"concat-stream": "~1.6.0",
 	"form-data": "~2.1.2",
 	"front-matter": "~2.1.1",
-	"marked": "~1.0.0",
+	"marked": "~4.0.10",
 	"mustache": "~2.3.0",
 	"netrc": "~0.1.4",
 	"node-fetch": "~1.6.3",
