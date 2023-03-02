@@ -3,7 +3,7 @@
 
 let spawn = require('child_process').spawn
 
-let marked = require('marked')
+let {marked} = require('marked')
 let fm = require('front-matter')
 let commander = require('commander')
 let concat = require('concat-stream')
